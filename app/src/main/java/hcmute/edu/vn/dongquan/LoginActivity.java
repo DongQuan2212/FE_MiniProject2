@@ -53,7 +53,14 @@ public class LoginActivity extends AppCompatActivity {
                 pairs[6] = new Pair<View,String>(callSignUp,"btn_login_signup_tran");
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this,pairs);
                 startActivity(intent,options.toBundle());
-
+            }
+        });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

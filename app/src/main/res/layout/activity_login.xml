@@ -15,7 +15,7 @@
         android:id="@+id/logo_image"
         android:layout_width="122dp"
         android:layout_height="119dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/logo_logib"
         android:transitionName="logo_image" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="-20dp"
         android:fontFamily="@font/bungee"
-        android:text="Hello guy, wellcom back"
+        android:text="Hello guy, welcome back"
         android:textColor="@color/black"
         android:textSize="40dp"
         android:transitionName="logo_text" />

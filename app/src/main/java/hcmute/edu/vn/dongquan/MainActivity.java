@@ -1,81 +1,98 @@
 package hcmute.edu.vn.dongquan;
 
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
 
-
-    private boolean isClicked = false;
-
-    Animation topAnim, botAnim;
-    ImageView image;
-    TextView logo, slogan;
+    Animation topAnim, botAnim,leftAnim;
+    private ImageView imageAvatar;
+    private TextView textView, txtFullname;
+    private LinearLayout btnCurrentActivity;
+    private MaterialCardView materialCardView;
+    private RecyclerView recyclerView;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        // Kiểm tra xem đã mở app lần đầu chưa
-        SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        boolean isFirstTime = preferences.getBoolean("isFirstTime", true);
-
-        if (!isFirstTime) {
-            // Nếu không phải lần đầu, chuyển ngay sang DashboardActivity
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish();
-            return;
-        }
-
-        // Nếu là lần đầu, tiếp tục hiển thị Splash Screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        // Load animation
+        imageAvatar = findViewById(R.id.image_avatar);
+        txtFullname = findViewById(R.id.txt_fullname);
+        textView = findViewById(R.id.txt_hello);
+        btnCurrentActivity=findViewById(R.id.btn_current_activite);
+        recyclerView = findViewById(R.id.list_activities);
+        materialCardView = findViewById(R.id.card_list_activites);
+        fab = findViewById(R.id.fab);
+
+        leftAnim = AnimationUtils.loadAnimation(this, R.anim.left_animation);
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         botAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
 
-        // Ánh xạ view
-        image = findViewById(R.id.image_logo);
-        logo = findViewById(R.id.txt_Slogan);
-        slogan = findViewById(R.id.des_layout_main);
-        View rootView = findViewById(android.R.id.content);
+        fab.setAnimation(botAnim);
+        imageAvatar.setAnimation(topAnim);
+        txtFullname.setAnimation(topAnim);
+        textView.setAnimation(topAnim);
+        materialCardView.setAnimation(leftAnim);
 
-        // Gán animation
-        image.setAnimation(topAnim);
-        logo.setAnimation(botAnim);
-        slogan.setAnimation(botAnim);
 
-        // Khi nhấn vào màn hình, chuyển ngay sang Dashboard
-        rootView.setOnClickListener(v -> {
-            if (!isClicked) {
-                isClicked = true;
-                goToLogin();
+        imageAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View, String>(imageAvatar, "image_avatar");
+                pairs[1] = new Pair<View, String>(txtFullname, "txt_fullname");
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+                startActivity(intent, options.toBundle());
+
             }
         });
-
-        // Đánh dấu rằng app đã mở lần đầu
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("isFirstTime", false);
-        editor.apply();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCustomDialog();
+            }
+        });
     }
-    private void goToLogin() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        Pair [] pairs = new Pair[2];
-        pairs [0] = new Pair<View,String>(image,"logo_image");
-        pairs [1] = new Pair<View,String>(logo,"logo_text");
+    private void showCustomDialog() {
+        // Inflate layout của dialog
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_tracking_info, null);
+        // Tạo AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
-        startActivity(intent,options.toBundle());
+        AlertDialog dialog = builder.create();
+
+        TextView tv_calo_current = dialogView.findViewById(R.id.txt_calo_current);
+        TextView tv_km_current = dialogView.findViewById(R.id.txt_km_current);
+        TextView tv_time_current = dialogView.findViewById(R.id.txt_time_curent);
+        TextView tv_date_current = dialogView.findViewById(R.id.txt_date_current);
+        ImageView btnDelete = dialogView.findViewById(R.id.btn_delete_activity_current);
+        ImageView btn_back = dialogView.findViewById(R.id.btn_back);
+
+        dialog.show();
+        btn_back.setOnClickListener(v -> dialog.dismiss());
     }
 }

@@ -15,19 +15,19 @@
         android:id="@+id/logo_image"
         android:layout_width="122dp"
         android:layout_height="119dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/logo_logib"
         android:transitionName="logo_image" />
 
     <TextView
         android:textColor="@color/black"
         android:id="@+id/logo_name"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
         android:layout_height="79dp"
         android:layout_marginTop="-20dp"
         android:fontFamily="@font/bungee"
-        android:text="Wellcome"
-        android:textSize="40dp" />
+        android:text="Welcome"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/logo_text"

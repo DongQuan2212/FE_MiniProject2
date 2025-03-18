@@ -46,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-
                 Pair[] pairs = new Pair[7];
                 pairs[0] = new Pair<View, String>(logoImage, "logo_image");
                 pairs[1] = new Pair<View, String>(logoName, "logo_name");
