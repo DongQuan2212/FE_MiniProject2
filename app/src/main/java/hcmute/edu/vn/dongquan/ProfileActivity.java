@@ -20,7 +20,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_profile);
-
         // Ánh xạ các View
         btnBackMain = findViewById(R.id.dialog_map);
         imageAvatar = findViewById(R.id.image_avatar);
@@ -32,7 +31,6 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btn_logout);
 
         btnLogout.setOnClickListener(view -> {
-            // Xử lý đăng xuất
             logoutUser();
         });
         btnBackMain.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +39,22 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        btnYourActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ListActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        btnThongKe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, StatisticActivity.class);
+                startActivity(intent);
+
             }
         });
     }

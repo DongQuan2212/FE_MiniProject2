@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     Animation topAnim, botAnim,leftAnim;
     private ImageView imageAvatar;
-    private TextView textView, txtFullname;
+    private TextView textView, txtFullname, textAll;
     private LinearLayout btnCurrentActivity;
     private MaterialCardView materialCardView;
     private RecyclerView recyclerView;
@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         imageAvatar = findViewById(R.id.image_avatar);
         txtFullname = findViewById(R.id.txt_fullname);
         textView = findViewById(R.id.txt_hello);
+        textAll = findViewById(R.id.txt_all);
         btnCurrentActivity=findViewById(R.id.btn_current_activite);
         recyclerView = findViewById(R.id.list_activities);
         materialCardView = findViewById(R.id.card_list_activites);
         fab = findViewById(R.id.fab);
-
         leftAnim = AnimationUtils.loadAnimation(this, R.anim.left_animation);
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         botAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         imageAvatar.setAnimation(topAnim);
         txtFullname.setAnimation(topAnim);
         textView.setAnimation(topAnim);
-        materialCardView.setAnimation(leftAnim);
+
 
 
         imageAvatar.setOnClickListener(new View.OnClickListener() {
@@ -71,9 +71,28 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showCustomDialog();
+                Intent intent = new Intent(MainActivity.this, CurrentSessionActivity.class);
+                startActivity(intent);
+
             }
         });
+        materialCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCustomDialog();
+
+            }
+        });
+        textAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
     private void showCustomDialog() {
         // Inflate layout của dialog
@@ -87,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv_calo_current = dialogView.findViewById(R.id.txt_calo_current);
         TextView tv_km_current = dialogView.findViewById(R.id.txt_km_current);
-        TextView tv_time_current = dialogView.findViewById(R.id.txt_time_curent);
+        TextView tv_time_current = dialogView.findViewById(R.id.txt_time_current);
         TextView tv_date_current = dialogView.findViewById(R.id.txt_date_current);
         ImageView btnDelete = dialogView.findViewById(R.id.btn_delete_activity_current);
         ImageView btn_back = dialogView.findViewById(R.id.btn_back);

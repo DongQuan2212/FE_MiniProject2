@@ -21,7 +21,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="399dp">
+                android:layout_height="380dp">
 
                 <ImageView
                     android:id="@+id/imageView4"
@@ -98,8 +98,8 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
+                    android:layout_width="31dp"
+                    android:layout_height="26dp"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/dialog_map"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +125,7 @@
                     android:background="@drawable/bg_btn_profile">
 
                     <TextView
+
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -139,8 +140,8 @@
 
                     <ImageView
                         android:id="@+id/imageView11"
-                        android:layout_width="25dp"
-                        android:layout_height="35dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

@@ -27,11 +27,6 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        // Kiểm tra xem đã mở app lần đầu chưa
-        SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-
-
-        // Nếu là lần đầu, tiếp tục hiển thị Splash Screen
         setContentView(R.layout.activity_intro);
 
         // Load animation
